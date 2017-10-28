@@ -60,7 +60,7 @@ public class mPerceptron
 	static double theta2[] = new double[2];
 	static double theta3[] = new double[2];
 	static double theta4[] = new double[1];
-	static double a[][] = new double[5][2];
+	static double a[][] = new double[4][2];
 	//static double a[2][] = new double[][2];
 	//static double a[3][] = new double[][2];
 	//static double a[4][] = new double[][1];
@@ -84,7 +84,7 @@ public class mPerceptron
 		a2[] = new double[2];
 		a3[] = new double[2];
 		a4[] = new double[1];*/
-		for(int k = 1;k<inputs.length-1;k++)
+		for(int k = 0;k<inputs.length-1;k++)
 		{
 			a[k][0] = 1;
 		}
@@ -93,9 +93,9 @@ public class mPerceptron
 		for(int i1 = 0;i1<inputs.length;i1++)
                 {
                      
-			for(int j1 = 1;j1<inputs.length;j1++)
+			for(int j1 = 0;j1<inputs[0].length;j1++)
 				{
-                                a[j1][1] = inputs[i1][j1-1];
+                                a[j1][1] = inputs[i1][j1];
                                 /*a2[1] = inputs[i1][j1+1];
                                 a3[1] = inputs[i1][j1+2];
                                 a4[0] = inputs[i1][j1+3];
@@ -105,13 +105,13 @@ public class mPerceptron
 		for(int i = 0;i<epoch;i++)
 		{
 			
-			a[2][1] = sigmoid(a[1][0]*theta1[0] + a[1][1]*theta1[1]);
-			a[3][1] = sigmoid(a[2][0]*theta2[0] + a[2][1]*theta2[1]);
-			a[4][1] = sigmoid(a[3][0]*theta3[0] + a[3][1]*theta3[1]);
+			a[1][1] = sigmoid(a[0][0]*theta1[0] + a[0][1]*theta1[1]);
+			a[2][1] = sigmoid(a[1][0]*theta2[0] + a[1][1]*theta2[1]);
+			a[3][1] = sigmoid(a[2][0]*theta3[0] + a[2][1]*theta3[1]);
 
 		}
 		}
-		if((a[1][1] + a[2][1] + a[3][1] + a[4][1]) > 3)
+		if((a[0][1] + a[1][1] + a[2][1] + a[3][1]) > 3)
 			return 1;
 		else
 			return 0;
@@ -135,11 +135,11 @@ public class mPerceptron
 		String param = sc.nextLine();
 		System.out.println("Scanner or BufferReader");
 		String ch = sc.nextLine();
+			System.out.println(a[0][1]);
 			System.out.println(a[1][1]);
 			System.out.println(a[2][1]);
 			System.out.println(a[3][1]);
-			System.out.println(a[4][1]);
-		if(a[1][1] >= 0.5)
+		if(a[0][1] >= 0.5)
 		{
 			if(ch == "scanner")
 			{
@@ -150,16 +150,16 @@ public class mPerceptron
 				t.Bpack();
 			}
 		}
-		if(a[2][1] >= 0.5)
+		if(a[1][1] >= 0.5)
 		{
 			t.cpack();
 			t.cname();
 		}
-		if(a[3][1] >= 0.5)
+		if(a[2][1] >= 0.5)
 		{
 			t.mfunc();
 		}
-		if(a[4][1] >= 0.5)
+		if(a[3][1] >= 0.5)
 		{
 			if(ch.equalsIgnoreCase("scanner"))
 			{
